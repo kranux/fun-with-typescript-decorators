@@ -1,8 +1,10 @@
-import { Observable } from 'rxjs/Observable';
+/* tslint:disable:no-console */
+
 import 'rxjs/add/observable/timer';
-import 'rxjs/add/operator/timeInterval';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/timeInterval';
+import { Observable } from 'rxjs/Observable';
 import { SubscriptionPool } from './subscription-pool';
 // import { propertyDecorator } from './decorator';
 
@@ -16,7 +18,7 @@ interface IComponent {
   ngOnDestroy: () => void;
 }
 
-class DecoratorTest implements IComponent{
+class DecoratorTest implements IComponent {
   // @propertyDecorator
   private isLoading = true;
   @SubscriptionPool private subscriptions;
@@ -32,22 +34,22 @@ class DecoratorTest implements IComponent{
     }, 2000);
   }
 
-  doStuff() {
+  public doStuff() {
     this.subscriptions.add(source$.subscribe(x => console.log(this.name, x)));
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.isLoading = false;
     console.log('original onInit', this.name);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     console.log('original ngOnDestroy', this.name);
   }
 }
 
-const decoratorTestA = new DecoratorTest("A");
+const decoratorTestA = new DecoratorTest('A');
 decoratorTestA.doStuff();
 
-const decoratorTestB = new DecoratorTest("B");
+const decoratorTestB = new DecoratorTest('B');
 decoratorTestB.doStuff();

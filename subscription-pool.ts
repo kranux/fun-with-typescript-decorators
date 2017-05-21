@@ -1,3 +1,5 @@
+/* tslint:disable:no-console */
+
 import { Subscription } from 'rxjs/Subscription';
 
 // Usage
@@ -7,26 +9,26 @@ import { Subscription } from 'rxjs/Subscription';
 // this.subscriptions.add(Observable.of('aaaa').subscribe( (a) => {
 // ...
 export const SubscriptionPool = (target: any, name: string) => {
-  const originalOnDestroy = target['ngOnDestroy'];
-  const originalOnInit = target['ngOnInit'];
+  const originalOnDestroy = target.ngOnDestroy;
+  const originalOnInit = target.ngOnInit;
 
-  target['ngOnInit'] = function(...args) {
+  target.ngOnInit = function(...args) {
 
     this[name] = new Subscription();
 
     if (typeof originalOnInit === 'function') {
       originalOnInit.apply(this, args);
     }
-  }
+  };
 
-  target['ngOnDestroy'] = function(...args) {
+  target.ngOnDestroy = function(...args) {
 
     if (typeof originalOnDestroy === 'function') {
       originalOnDestroy.apply(this, args);
     }
 
-    if (this[name] && typeof this[name]['unsubscribe'] === 'function') {
-      this[name]['unsubscribe']();
+    if (this[name] && typeof this[name].unsubscribe === 'function') {
+      this[name].unsubscribe();
     }
   };
 };
