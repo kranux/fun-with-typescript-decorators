@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 // in your-component.ts:
 // @SubscriptionPool private subscriptions;
 // ...
-// this.subscriptions.add(Observable.of('aaaa').subscribe( (a) => {
+// this.subscriptions.add(stream$.subscribe( (a) => {
 // ...
 export const SubscriptionPool = function(target: any, name: string) {
   const originalOnDestroy = target.ngOnDestroy;
