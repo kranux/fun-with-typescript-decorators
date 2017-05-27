@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import { Subscription } from 'rxjs/Subscription';
 
 // Usage
@@ -8,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 // ...
 // this.subscriptions.add(Observable.of('aaaa').subscribe( (a) => {
 // ...
-export const SubscriptionPool = (target: any, name: string) => {
+export const SubscriptionPool = function(target: any, name: string) {
   const originalOnDestroy = target.ngOnDestroy;
   const originalOnInit = target.ngOnInit;
 
